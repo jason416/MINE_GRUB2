@@ -78,8 +78,6 @@ BEGIN_FUNC(_start)
     movl %eax, %cr0
 #endif
 
-	call _simple_loop
-
 	lgdt _gdt64_ptr
     /* Reload CS with long bit to enable long mode. */
     ljmp $8, $_start64
@@ -90,6 +88,8 @@ END_FUNC(_start)
 .code64
 /*.align 4096*/
 BEGIN_FUNC(_start64)
+	call _simple_loop
+
      /* Leave phys code behind and jump to the high kernel virtual address. */
     movabs $_entry_64, %rax
     jmp *%rax
@@ -109,7 +109,7 @@ END_FUNC(_start64)
 __PML4E:                     /* level 1 */
 	.quad	0x102007
 	.fill	255,8,0
-	.quad	0x102007
+    .quad	0x102007         /* TO DO: fix 0xffffffff80000000 virtual address not mapped in PET */   
 	.fill	255,8,0
 
 /* level 2 */

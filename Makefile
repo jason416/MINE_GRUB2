@@ -50,7 +50,7 @@ kernel.elf: $(ASM_OBJ) $(C_OBJ)
 	clean
 
 clean:
-	rm -rf kernel.elf* *.o 
+	rm -rf kernel.elf* *.o 1.txt
 
 # ***multiboot a 64-bits kernel, dump to 32-bits elf file, multiboot can succees***
 
