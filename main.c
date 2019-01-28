@@ -1,9 +1,13 @@
 /*************************************************************************
-	> File Name: main.c
-	> Author: 
-	> Mail: 
-	> Created Time: 2019年01月18日 星期五 16时55分15秒
+ * 		 Copyright (c) 2018 Jason416
+ *
+ * This software may be distributed and modified according to the terms of
+ * the GNU General Public License version 2. Note that NO WARRANTY is provided.
+ * See "LICENSE_GPLv2.txt" for details.
+ *
+ *
  ************************************************************************/
+ 
  #include "linkage.h"
 void Start_Kernel(void);
 

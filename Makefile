@@ -1,5 +1,14 @@
-
-CC=gcc
+#/*************************************************************************
+# * 		 Copyright (c) 2018 Jason416
+# *
+# * This software may be distributed and modified according to the terms of
+# * the GNU General Public License version 2. Note that NO WARRANTY is provided.
+# * See "LICENSE_GPLv2.txt" for details.
+# *
+# *
+# ************************************************************************/
+ 
+CC = gcc
 
 MARCH_FLAGS = -march=nehalem -mno-mmx -mno-sse -mno-sse2 -mno-3dnow
 OTHER_FLAGS = -O2 -g -ggdb 
@@ -7,17 +16,17 @@ AS_FALGS = -Wa,--64 -nostdinc -nostdlib -mcmodel=kernel -fno-pic -fno-pie -fno-s
 -std=c99 -Wall -Werror -Wstrict-prototypes -Wmissing-prototypes -Wnested-externs -Wmissing-declarations -Wundef -Wpointer-arith -Wno-nonnull -ffreestanding
 
 
-CC_FLAGS=-m64 -nostdinc -nostdlib -mcmodel=kernel -fno-pic -fno-pie -fno-stack-protector -fno-asynchronous-unwind-tables -std=c99 \
+CC_FLAGS = -m64 -nostdinc -nostdlib -mcmodel=kernel -fno-pic -fno-pie -fno-stack-protector -fno-asynchronous-unwind-tables -std=c99 \
 -Wall -Werror -Wstrict-prototypes -Wmissing-prototypes -Wnested-externs -Wmissing-declarations -Wundef -Wpointer-arith -Wno-nonnull -ffreestanding 
 
-KERNEL_FLAGS=-m64 -Wl,-m -Wl,elf_x86_64 -nostdinc -nostdlib -mcmodel=kernel -fno-pic -fno-pie -ffreestanding -Wl,--build-id=none -static -Wl,-n
+KERNEL_FLAGS = -m64 -Wl,-m -Wl,elf_x86_64 -nostdinc -nostdlib -mcmodel=kernel -fno-pic -fno-pie -ffreestanding -Wl,--build-id=none -static -Wl,-n
 
 all: kernel.elf
 
 #$@--OBJ，$^--ALL FILE NEEDED，$<--FIRST FILE NEEDED。
 
-ASM_OBJ=multiboot.o head.o #entry.o
-C_OBJ=grub_test.o main.o
+ASM_OBJ = multiboot.o head.o #entry.o
+C_OBJ = grub_test.o main.o
 
 multiboot.o: multiboot.S
 	$(CC) $(AS_FALGS) -o $@ -c $<
@@ -43,9 +52,9 @@ kernel.elf: $(ASM_OBJ) $(C_OBJ)
 clean:
 	rm -rf kernel.elf* *.o 
 
+# ***multiboot a 64-bits kernel, dump to 32-bits elf file, multiboot can succees***
 
 #objcopy -O elf32-i386 kernel.elf kernel-x86_64-pc99
-#cp capdl-loader capdl-loader-image-x86_64-pc99
 
 # .S compile flags
 # gcc -Wa,--64  -march=nehalem -O2 -g -ggdb -nostdinc -nostdlib -mcmodel=kernel -fno-pic -fno-pie -fno-stack-protector -fno-asynchronous-unwind-tables \
