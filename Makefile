@@ -34,6 +34,7 @@ main.o: main.c
 kernel.elf: $(ASM_OBJ) $(C_OBJ) 
 	$(CC) $(KERNEL_FLAGS) -T linker.lds $^ -o $@64
 	objcopy -O elf32-i386 $@64 $@ 
+	./objdump.sh $@
 	@#rm -rf $@64
 
 .PHONY:

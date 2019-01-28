@@ -88,9 +88,12 @@ END_FUNC(_start64)
 
 .comm temp_buf,20,4
 /* OS important data structure */
+
 .section .phys.data
+
 /* PG structure */
-.align 8
+/* 0x101000 */
+.align 4096
 .globl __PML4E
     
 __PML4E:                     /* level 1 */
@@ -100,11 +103,13 @@ __PML4E:                     /* level 1 */
 	.fill	255,8,0
 
 /* level 2 */
+/* 0x102000 */
 __PDPTE:
 	.quad	0x103007		/* set user accessible */
 	.fill	511,8,0
 
 /* level 3 */
+/* 0x103000 */
 __PDE:
 	.quad	0x000087		/* set user accessible */
 	.quad	0x200087
